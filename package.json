@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "bin": "node cli.js",
+  "bin": {
+    "try": "./cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,12 +1,13 @@
 # :package: try
 
+**Quickly try out npm packages inside a container.**
+
 [![NPM Package](https://badge.fury.io/js/try-pkg.svg)](https://www.npmjs.com/package/try-pkg)
 ![Dependencies](https://img.shields.io/david/BrunnerLivio/try.svg)
 [![Build Status](https://travis-ci.org/BrunnerLivio/try.svg?branch=master)](https://travis-ci.org/BrunnerLivio/try)
 
-**Quickly try out npm packages inside a container.**
 
-![Demo animation](demo.gif)
+<img src="demo.gif" width="500" alt="Demo animation"/>
 
 ## Purpose
 
@@ -39,12 +40,12 @@ Options:
 
 ## Installation
 
-## Prerequisites
+### Prerequisites
 
 - [Node >= 8](https://nodejs.org/en/download/package-manager/)
 - [Docker](https://docs.docker.com/install/)
 
-## npm package
+### npm package
 
 To install `try` using `npm` run:
 
@@ -54,7 +55,7 @@ npm install -g try-pkg
 
 ```
 
-## From source
+### From source
 
 To install it from source you need to clone this repository,
 install the dependencies using `npm` and execute the program.
@@ -68,6 +69,6 @@ node cli.js
 
 ```
 
-# Other
+## Other
 
 Inspired by [timofurrer/try](https://github.com/TimoFurrer/try) - Thanks buddy :)

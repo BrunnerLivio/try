@@ -39,6 +39,7 @@ Options:
 
 ## Prerequisites
 
+- [Node >= 8](https://nodejs.org/en/download/package-manager/)
 - [Docker](https://docs.docker.com/install/)
 
 ## npm package

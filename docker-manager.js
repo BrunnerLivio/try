@@ -1,6 +1,8 @@
 const Docker = require('dockerode');
 const log = require('loglevel');
 const uuid = require('uuid/v1');
+const { DockerNotInstalledError } = require('./errors');
+const errorMessages = require('./error-messages');
 
 const CTRL_P = '\u0010';
 const CTRL_Q = '\u0011';
@@ -112,6 +114,15 @@ module.exports = class DockerManager {
                 resolve();
             });
         });
-        
+    }
+
+    async ping() {
+        try {
+            return await this.docker.ping();
+        } catch(err) {
+            throw new DockerNotInstalledError(
+                errorMessages.DOCKER_NOT_INSTALLED
+            );
+        }
     }
 }

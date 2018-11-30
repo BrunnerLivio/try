@@ -24,9 +24,12 @@ function parseInstalledPackages(msg) {
 
 async function tryPackage(packages) {
     log.setLevel('info');
+    
+    const docker = new DockerManager();
+    await docker.ping();
+
     log.info(`=> ${emoji.get('hourglass_flowing_sand')} Setting up environment`);
 
-    const docker = new DockerManager();
     await docker.pullImage();
     await docker.createContainer();
     

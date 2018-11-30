@@ -1,6 +1,6 @@
 {
-  "name": "try-package",
-  "version": "0.0.1",
+  "name": "try-pkg",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "bin": {

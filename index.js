@@ -1,4 +1,3 @@
-const { promisify } = require('util');
 
 const log = require('loglevel');
 const emoji = require('node-emoji');
@@ -6,22 +5,19 @@ const emoji = require('node-emoji');
 const { DockerNotInstalledError, TryPackageError } = require('./errors');
 const DockerManager = require('./docker-manager.js');
 
-// Import exec and promisify it
-const exec = promisify(require('child_process').exec);
-
 // TODO: Implement with program
-function parseInstalledPackages(msg) {
-  const regex = / ([^\s]+)@(.*)/gm;
-  const matches = regex.exec(msg);
-  const packages = [];
-  while ((m = regex.exec(msg)) !== null) {
-    if (m.index === regex.lastIndex) {
-        regex.lastIndex++;
-    }
-    packages.push(m[0])
-  }
-  return packages;
-}
+// function parseInstalledPackages(msg) {
+//   const regex = / ([^\s]+)@(.*)/gm;
+//   const matches = regex.exec(msg);
+//   const packages = [];
+//   while ((m = regex.exec(msg)) !== null) {
+//     if (m.index === regex.lastIndex) {
+//         regex.lastIndex++;
+//     }
+//     packages.push(m[0])
+//   }
+//   return packages;
+// }
 
 /**
  * Spawns a docker container, installs the given packages and runs the

@@ -4,11 +4,11 @@
   "description": "Quickly try out npm packages inside a container",
   "main": "index.js",
   "bin": {
-    "try": "./cli.js",
-    "lint": "eslint **/*.js"
+    "try": "./cli.js"
   },
   "scripts": {
-    "start": "node cli.js"
+    "start": "node cli.js",
+    "lint": "eslint **/*.js"
   },
   "author": {
     "email": "livio.brunner.lb1@gmail.com",

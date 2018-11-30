@@ -6,6 +6,8 @@
 
 **Quickly try out npm packages inside a container.**
 
+![Demo animation](demo.gif)
+
 ## Purpose
 
 As a developer working with NodeJS you often stumble upon packages you quickly want to try out.

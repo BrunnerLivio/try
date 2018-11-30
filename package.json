@@ -1,20 +1,38 @@
 {
   "name": "try-pkg",
   "version": "0.0.4",
-  "description": "",
+  "description": "Quickly try out npm packages inside a container",
   "main": "index.js",
   "bin": {
     "try": "./cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node cli.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "email": "livio.brunner.lb1@gmail.com",
+    "name": "Livio Brunner",
+    "url": "https://brunerliv.io"
+  },
+  "bugs": {
+    "url": "https://github.com/BrunnerLivio/try/issues",
+    "email": "livio.brunner.lb1@gmail.com"
+  },
+  "homepage": "https://github.com/BrunnerLivio/try",
+  "keywords": [
+    "docker",
+    "try",
+    "npm"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BrunnerLivio/try"
+  },
   "dependencies": {
+    "commander": "^2.19.0",
     "dockerode": "^2.5.7",
     "loglevel": "^1.6.1",
-    "minimist": "^1.2.0",
     "node-emoji": "^1.8.1",
     "uuid": "^3.3.2"
   }

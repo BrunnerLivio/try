@@ -12,14 +12,31 @@ As a developer working with NodeJS you often stumble upon packages you quickly w
 
 ## Usage
 
+You can print the usage by executing `try --help`.
+
 ```shell
-try-pkg [packages]
+
+Usage: try [packages]
+
+Quickly try out npm packages inside a container
+
+Options:
+  -V, --version              output the version number
+  -v, --verbose              Verbosity value
+  -i, --image [image]        The docker image which it should pull from [node] (default: "node")
+  --image-version [version]  Specify the node image version [latest] (default: "latest")
+  --silent                   If the program should not print any log statements
+  -h, --help                 output usage information
+
 ```
 
 ## Installation
 
 
+You can install the package using npm.
 
 ```shell
+
 npm install -g try-pkg
+
 ```

@@ -7,15 +7,28 @@ const errorMessages = require('./error-messages');
 const CTRL_P = '\u0010';
 const CTRL_Q = '\u0011';
 
+/**
+ * The DockerManager which acts as a wrapper around dockerode
+ */
 module.exports = class DockerManager {
+    /**
+     * Initailizes the DockerManager
+     */
     constructor() {
         this.docker = new Docker();
     }
 
+    /**
+     * Generates an unique container name
+     */
    _generateContainerName() {
         const containerUUID = uuid().split('-')[0];
         return `try-package-${containerUUID}`;
    }
+
+   /**
+    * Resizes the container when the uses tty resizes
+    */
    _resize () {
         const dimensions = {
             h: process.stdout.rows,
@@ -27,6 +40,10 @@ module.exports = class DockerManager {
         }
     }
 
+    /**
+     * Exists the given stream and removes all listeners
+     * @param {stream} stream The stream to exit
+     */
     _exit (stream) {
         process.stdout.removeListener('resize', this._resize);
         process.stdin.removeAllListeners();
@@ -36,6 +53,10 @@ module.exports = class DockerManager {
         process.exit();
     }
 
+    /**
+     * Connects the tty stdin / stdout to the given stream
+     * @param {Stream} stream The exec stream
+     */
     _connectStd(stream) {
         // Show outputs
         stream.pipe(process.stdout);
@@ -53,7 +74,11 @@ module.exports = class DockerManager {
         });
     }
       
-    
+    /**
+     * Pulls the given image
+     * @param {string} image The image which should get pulled
+     * @param {string} version The version of the image which should get pulled 
+     */
     pullImage(image = 'node', version = 'latest') {
         this.imageName = `${image}:${version}`;
         log.debug(`=> Pulling ${this.imageName}`);
@@ -68,6 +93,9 @@ module.exports = class DockerManager {
         });
     }
 
+    /**
+     * Creates the container with an unique id
+     */
     async createContainer() {
         this.containerName = this._generateContainerName();
         log.debug(`=> Creating container ${this.containerName}`);
@@ -81,6 +109,10 @@ module.exports = class DockerManager {
         await this.container.start();
     }
 
+    /**
+     * Executes the given program in the Docker container
+     * @param {string[]} command The program to execute
+     */
     async execute(command) {
           const exec = await this.container.exec({
             Cmd: command,
@@ -98,6 +130,9 @@ module.exports = class DockerManager {
           });
     }
 
+    /**
+     * Attaches the stdin and stdout to the Docker node process
+     */
     async attachStdin() {
         const attach_opts = {stream: true, stdin: true, stdout: true, stderr: true};
         return new Promise((resolve, reject) => {
@@ -110,12 +145,23 @@ module.exports = class DockerManager {
           
                 await this.container.wait();
                 this._exit(stream);
-                await this.container.remove();
                 resolve();
             });
         });
     }
 
+    /**
+     * Removes the docker container
+     */
+    async removeContainer() {
+        log.debug('=> Removing container');
+        await this.container.remove();
+    }
+
+    /**
+     * Ping the Docker API
+     * @throws {DockerNotInstalledError} Gets thrown when could not ping Docker API
+     */
     async ping() {
         try {
             return await this.docker.ping();

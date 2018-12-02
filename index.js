@@ -20,7 +20,7 @@ const DockerManager = require('./docker-manager.js');
 //   return packages;
 // }
 
-const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error'];
+const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'silent'];
 
 /**
  * Spawns a docker container, installs the given packages and runs the
@@ -48,7 +48,7 @@ async function tryPackage(packages, options) {
     const message = await docker.pullImage(options.image, options.version);
     log.debug('=> Pulled image', message);
     const containerName = await docker.createContainer();
-    
+
     // Check if node is working
     let nodeVersion = await docker.execute(['node', '-v']);
 
@@ -73,7 +73,7 @@ async function tryPackage(packages, options) {
     if (options.noCleanup) {
         log.info(`=> Keeping container. Run the container with`);
         log.info(`=> docker exec -it ${containerName} /bin/bash`)
-    await docker.removeContainer();
+        await docker.removeContainer();
     }
 
     process.exit(0);

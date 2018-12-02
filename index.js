@@ -59,7 +59,7 @@ async function tryPackage(packages, options) {
     
     // Install packages
     log.debug('Installing packages');
-    await docker.execute(['npm', 'i', ...packages]);
+    await docker.execute(['yarn', 'add', ...packages]);
     spinner.stop();
     spinner.clearLine();
     log.info(`=> ${emoji.get('package')} Using NodeJS ${nodeVersion.replace('\n', '')}`)

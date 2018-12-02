@@ -41,8 +41,12 @@ async function tryPackage(packages, options) {
     const docker = new DockerManager();
     // Check if Docker API is available
     await docker.ping();
-    const spinner = new Spinner(`=> ${emoji.get('hourglass_flowing_sand')} Setting up environment %s`);
-    spinner.start()
+
+    let spinner = {};
+    if (verbosity === 2) {
+        spinner = new Spinner(`=> ${emoji.get('hourglass_flowing_sand')} Setting up environment %s`);
+        spinner.start()
+    }
 
     // Update image and create the container
     const message = await docker.pullImage(options.image, options.version);
@@ -62,7 +66,7 @@ async function tryPackage(packages, options) {
     log.debug('Installing packages');
     await docker.execute(['yarn', 'add', ...packages]);
 
-    spinner.stop();
+    if (verbosity === 2) spinner.stop();
     // Add newline after spinner
     log.info('');
     log.info(`=> ${emoji.get('package')} Using NodeJS ${nodeVersion.replace('\n', '')}`)

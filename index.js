@@ -1,6 +1,7 @@
 
 const log = require('loglevel');
 const emoji = require('node-emoji');
+const Spinner = require('cli-spinner').Spinner;
 
 const { DockerNotInstalledError, TryPackageError } = require('./errors');
 const DockerManager = require('./docker-manager.js');
@@ -19,6 +20,8 @@ const DockerManager = require('./docker-manager.js');
 //   return packages;
 // }
 
+const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error'];
+
 /**
  * Spawns a docker container, installs the given packages and runs the
  * 'node' process.
@@ -29,31 +32,36 @@ const DockerManager = require('./docker-manager.js');
  * @param {string} [options.version=latest] The version of the docker image
  */
 async function tryPackage(packages, options) {
-    log.setLevel(options.verbose || 2);
+    // options.verbose can be 0, therefor need to be
+    // explictely check if is null
+    const verbosity = options.verbose === null ? 2 : options.verbose;
+    log.setLevel(LOG_LEVELS[verbosity]);
     
     const docker = new DockerManager();
     // Check if Docker API is available
     await docker.ping();
-
-    log.info(`=> ${emoji.get('hourglass_flowing_sand')} Setting up environment`);
+    const spinner = new Spinner(`=> ${emoji.get('hourglass_flowing_sand')} Setting up environment %s`);
+    spinner.start()
 
     // Update image and create the container
     const message = await docker.pullImage(options.image, options.version);
-    log.trace('=> Pulled image', message);
+    log.debug('=> Pulled image', message);
     await docker.createContainer();
     
     // Check if node is working
     let nodeVersion = await docker.execute(['node', '-v']);
 
     // Go into tmp directory and init npm
+    log.debug('Creating test folder in /tmp/test')
     await docker.execute(['cd', '/tmp']);
     await docker.execute(['mkdir', 'test']);
     await docker.execute(['cd', 'test']);
-    await docker.execute(['npm', 'init', '-y']);
     
     // Install packages
+    log.debug('Installing packages');
     await docker.execute(['npm', 'i', ...packages]);
-
+    spinner.stop();
+    spinner.clearLine();
     log.info(`=> ${emoji.get('package')} Using NodeJS ${nodeVersion.replace('\n', '')}`)
 
     // Start node and attach to stdin

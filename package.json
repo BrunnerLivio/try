@@ -38,6 +38,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "cli-spinner": "^0.2.8",
     "eslint": "^5.9.0"
   }
 }

@@ -30,6 +30,7 @@ const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error'];
  * @param {number} [options.verbose=2] Numeric index of the log verbosity from 0 (trace) to 5 (silent)
  * @param {string} [options.image=node] The name of the docker image
  * @param {string} [options.version=latest] The version of the docker image
+ * @param {string} [options.noCleanup=false] If it should not remove the container
  */
 async function tryPackage(packages, options) {
     // options.verbose can be 0, therefor need to be
@@ -46,7 +47,7 @@ async function tryPackage(packages, options) {
     // Update image and create the container
     const message = await docker.pullImage(options.image, options.version);
     log.debug('=> Pulled image', message);
-    await docker.createContainer();
+    const containerName = await docker.createContainer();
     
     // Check if node is working
     let nodeVersion = await docker.execute(['node', '-v']);
@@ -69,7 +70,11 @@ async function tryPackage(packages, options) {
     // Start node and attach to stdin
     await docker.execute(['node']);
     await docker.attachStdin();
+    if (options.noCleanup) {
+        log.info(`=> Keeping container. Run the container with`);
+        log.info(`=> docker exec -it ${containerName} /bin/bash`)
     await docker.removeContainer();
+    }
 
     process.exit(0);
 }

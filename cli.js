@@ -13,6 +13,7 @@ program
     .option('-v, --verbose', 'Verbosity value', (_, total) => total + 1, 0)
     .option('-i, --image [image]', 'The docker image which it should pull from', 'node')
     .option('--image-version [version]', 'Specify the node image version', 'latest')
+    .option('--no-cleanup', 'If set to true, the created container will not get cleaned up', false)
     .option('--silent', 'If the program should not print any log statements')
     .parse(process.argv)
 
@@ -34,7 +35,8 @@ async function main () {
         await tryPackage(packages, {
             version: program.imageVersion,
             image: program.image,
-            verbose: program.silent ? 5 : verbose
+            verbose: program.silent ? 5 : verbose,
+            noCleanup: !program.cleanup
         });
     } catch(err) {
         // If is expected exception, log it

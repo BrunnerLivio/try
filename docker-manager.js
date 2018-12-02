@@ -106,6 +106,7 @@ module.exports = class DockerManager {
             OpenStdin: true });
         log.debug('=> Starting container');
         await this.container.start();
+        return this.containerName;
     }
 
     /**

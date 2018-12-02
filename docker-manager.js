@@ -136,6 +136,7 @@ module.exports = class DockerManager {
     async attachStdin() {
         const attach_opts = {stream: true, stdin: true, stdout: true, stderr: true};
         return new Promise((resolve, reject) => {
+            log.trace('=> Attaching stdin')
             this.container.attach(attach_opts, async (err, stream) => {
                 if(err) return reject(err);
                 this._connectStd(stream);
@@ -164,6 +165,7 @@ module.exports = class DockerManager {
      */
     async ping() {
         try {
+            log.debug('=> Pinging docker');
             return await this.docker.ping();
         } catch(err) {
             throw new DockerNotInstalledError(

@@ -37,7 +37,9 @@ async function tryPackage(packages, options) {
 
     log.info(`=> ${emoji.get('hourglass_flowing_sand')} Setting up environment`);
 
-    await docker.pullImage();
+    // Update image and create the container
+    const message = await docker.pullImage(options.image, options.version);
+    log.trace('=> Pulled image', message);
     await docker.createContainer();
     
     // Check if node is working

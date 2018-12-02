@@ -11,8 +11,8 @@ program
     .description(packageJSON.description)
     .version(packageJSON.version)
     .option('-v, --verbose', 'Verbosity value', (_, total) => total + 1, 0)
-    .option('-i, --image [image]', 'The docker image which it should pull from [node]', 'node')
-    .option('--image-version [version]', 'Specify the node image version [latest]', 'latest')
+    .option('-i, --image [image]', 'The docker image which it should pull from', 'node')
+    .option('--image-version [version]', 'Specify the node image version', 'latest')
     .option('--silent', 'If the program should not print any log statements')
     .parse(process.argv)
 
@@ -32,7 +32,7 @@ verbose = verbose < 0 ? 0 : verbose;
 async function main () {
     try {
         await tryPackage(packages, {
-            imageVersion: program.imageVersion,
+            version: program.imageVersion,
             image: program.image,
             verbose: program.silent ? 5 : verbose
         });

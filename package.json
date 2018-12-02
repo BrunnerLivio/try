@@ -1,6 +1,6 @@
 {
   "name": "try-pkg",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Quickly try out npm packages inside a container",
   "main": "index.js",
   "bin": {
@@ -35,10 +35,10 @@
     "dockerode": "^2.5.7",
     "loglevel": "^1.6.1",
     "node-emoji": "^1.8.1",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "cli-spinner": "^0.2.8"
   },
   "devDependencies": {
-    "cli-spinner": "^0.2.8",
     "eslint": "^5.9.0"
   }
 }

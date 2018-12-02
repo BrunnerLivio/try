@@ -50,7 +50,6 @@ module.exports = class DockerManager {
         process.stdin.setRawMode(this.isRaw);
         process.stdin.resume();
         stream.end();
-        process.exit();
     }
 
     /**
@@ -154,9 +153,9 @@ module.exports = class DockerManager {
     /**
      * Removes the docker container
      */
-    async removeContainer() {
+    removeContainer() {
         log.debug('=> Removing container');
-        await this.container.remove();
+        return this.container.remove({ force: true });
     }
 
     /**
@@ -174,3 +173,4 @@ module.exports = class DockerManager {
         }
     }
 }
+

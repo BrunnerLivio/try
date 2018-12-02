@@ -60,14 +60,18 @@ async function tryPackage(packages, options) {
     // Install packages
     log.debug('Installing packages');
     await docker.execute(['yarn', 'add', ...packages]);
+
     spinner.stop();
-    spinner.clearLine();
+    // Add newline after spinner
+    log.info('');
     log.info(`=> ${emoji.get('package')} Using NodeJS ${nodeVersion.replace('\n', '')}`)
 
     // Start node and attach to stdin
     await docker.execute(['node']);
     await docker.attachStdin();
     await docker.removeContainer();
+
+    process.exit(0);
 }
 
 module.exports = { 

@@ -34,10 +34,10 @@ const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'silent'];
  */
 async function tryPackage(packages, options) {
     // options.verbose can be 0, therefor need to be
-    // explictely check if is null
+    // explicitly check if is null
     const verbosity = options.verbose === null ? 2 : options.verbose;
     log.setLevel(LOG_LEVELS[verbosity]);
-    
+
     const docker = new DockerManager();
     // Check if Docker API is available
     await docker.ping();
@@ -61,7 +61,7 @@ async function tryPackage(packages, options) {
     await docker.execute(['cd', '/tmp']);
     await docker.execute(['mkdir', 'test']);
     await docker.execute(['cd', 'test']);
-    
+
     // Install packages
     log.debug('Installing packages');
     await docker.execute(['yarn', 'add', ...packages]);
@@ -76,14 +76,15 @@ async function tryPackage(packages, options) {
     await docker.attachStdin();
     if (options.noCleanup) {
         log.info(`=> Keeping container. Run the container with`);
-        log.info(`=> docker exec -it ${containerName} /bin/bash`)
+        log.info(`=> docker start ${containerName} && docker exec -it ${containerName} /bin/bash`)
+      } else {
         await docker.removeContainer();
     }
 
     process.exit(0);
 }
 
-module.exports = { 
+module.exports = {
     tryPackage,
     DockerNotInstalledError,
     TryPackageError

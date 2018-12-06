@@ -34,7 +34,7 @@ module.exports = class DockerManager {
             h: process.stdout.rows,
             w: process.stderr.columns
         };
-    
+
         if (dimensions.h != 0 && dimensions.w != 0) {
             this.container.resize(dimensions, () => {});
         }
@@ -66,13 +66,13 @@ module.exports = class DockerManager {
         process.stdin.setEncoding('utf8');
         process.stdin.setRawMode(true);
         process.stdin.pipe(stream);
-    
+
         process.stdin.on('data', key => {
             if (this.previousKey === CTRL_P && key === CTRL_Q) this._exit(stream);
             this.previousKey = key;
         });
     }
-      
+
     /**
      * Pulls the given image
      * @param {string} image The image which should get pulled
@@ -143,7 +143,7 @@ module.exports = class DockerManager {
 
                 this._resize();
                 process.stdout.on('resize', () => this._resize());
-          
+
                 await this.container.wait();
                 this._exit(stream);
                 resolve();

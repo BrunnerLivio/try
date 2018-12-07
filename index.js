@@ -80,8 +80,6 @@ async function tryPackage(packages, options) {
       } else {
         await docker.removeContainer();
     }
-
-    process.exit(0);
 }
 
 module.exports = {

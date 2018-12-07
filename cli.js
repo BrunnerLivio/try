@@ -38,6 +38,7 @@ async function main () {
             verbose: program.silent ? 5 : verbose,
             noCleanup: !program.cleanup
         });
+        process.exit(0);
     } catch(err) {
         // If is expected exception, log it
         if (err instanceof TryPackageError) {

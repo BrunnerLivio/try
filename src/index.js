@@ -25,7 +25,7 @@ const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'silent'];
 /**
  * Spawns a docker container, installs the given packages and runs the
  * 'node' process.
- * @param {string[]} packages The packages which should get installed 
+ * @param {string[]} packages The packages which should get installed
  * @param {object} [options] The optional options
  * @param {number} [options.verbose=2] Numeric index of the log verbosity from 0 (trace) to 5 (silent)
  * @param {string} [options.image=node] The name of the docker image

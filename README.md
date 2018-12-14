@@ -65,7 +65,7 @@ install the dependencies using `npm` and execute the program.
 git clone https://github.com/BrunnerLivio/try.git
 cd try
 npm install
-node cli.js
+node src/cli.js
 
 ```
 

@@ -2,13 +2,13 @@
   "name": "try-pkg",
   "version": "0.0.0-development",
   "description": "Quickly try out npm packages inside a container",
-  "main": "index.js",
+  "main": "src/index.js",
   "bin": {
-    "try": "./cli.js"
+    "try": "./src/cli.js"
   },
   "scripts": {
-    "start": "node cli.js",
-    "lint": "eslint **/*.js",
+    "start": "node src/cli.js",
+    "lint": "eslint src/**/*.js",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once"
   },

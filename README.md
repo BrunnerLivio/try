@@ -72,3 +72,4 @@ node src/cli.js
 ## Other
 
 Inspired by [timofurrer/try](https://github.com/TimoFurrer/try) - Thanks buddy :)
+

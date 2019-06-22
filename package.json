@@ -46,7 +46,7 @@
     "@semantic-release/commit-analyzer": "^6.1.0",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/release-notes-generator": "^7.1.4",
-    "eslint": "^5.9.0",
+    "eslint": "^6.0.0",
     "semantic-release": "^15.12.5",
     "semantic-release-cli": "^5.1.1",
     "travis-deploy-once": "^5.0.10"

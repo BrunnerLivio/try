@@ -33,22 +33,22 @@
     "url": "https://github.com/BrunnerLivio/try"
   },
   "dependencies": {
-    "cli-spinner": "^0.2.8",
-    "commander": "^2.19.0",
-    "dockerode": "^2.5.7",
-    "loglevel": "^1.6.1",
-    "node-emoji": "^1.8.1",
+    "cli-spinner": "^0.2.10",
+    "commander": "^2.20.0",
+    "dockerode": "^2.5.8",
+    "loglevel": "^1.6.3",
+    "node-emoji": "^1.10.0",
     "progress": "^2.0.3",
-    "rxjs": "^6.3.3",
+    "rxjs": "^6.5.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@semantic-release/commit-analyzer": "^6.1.0",
-    "@semantic-release/git": "^7.0.5",
-    "@semantic-release/release-notes-generator": "^7.1.4",
-    "eslint": "^6.0.0",
-    "semantic-release": "^15.12.5",
+    "@semantic-release/commit-analyzer": "^6.2.0",
+    "@semantic-release/git": "^7.0.16",
+    "@semantic-release/release-notes-generator": "^7.2.1",
+    "eslint": "^6.0.1",
+    "semantic-release": "^15.13.18",
     "semantic-release-cli": "^5.1.1",
-    "travis-deploy-once": "^5.0.10"
+    "travis-deploy-once": "^5.0.11"
   }
 }

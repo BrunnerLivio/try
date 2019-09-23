@@ -35,7 +35,7 @@
   "dependencies": {
     "cli-spinner": "^0.2.10",
     "commander": "^3.0.0",
-    "dockerode": "^2.5.8",
+    "dockerode": "^3.0.0",
     "loglevel": "^1.6.3",
     "node-emoji": "^1.10.0",
     "progress": "^2.0.3",

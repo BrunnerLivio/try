@@ -4,7 +4,6 @@
 
 [![NPM Package](https://badge.fury.io/js/try-pkg.svg)](https://www.npmjs.com/package/try-pkg)
 ![Dependencies](https://img.shields.io/david/BrunnerLivio/try.svg)
-[![Build Status](https://travis-ci.org/BrunnerLivio/try.svg?branch=master)](https://travis-ci.org/BrunnerLivio/try)
 
 <img src="demo.gif" width="500" alt="Demo animation"/>
 

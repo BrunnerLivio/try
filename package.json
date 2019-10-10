@@ -9,8 +9,7 @@
   "scripts": {
     "start": "node src/cli.js",
     "lint": "eslint src/**/*.js",
-    "semantic-release": "semantic-release",
-    "travis-deploy-once": "travis-deploy-once"
+    "semantic-release": "semantic-release"
   },
   "author": {
     "email": "livio.brunner.lb1@gmail.com",
@@ -48,7 +47,6 @@
     "@semantic-release/release-notes-generator": "^7.2.1",
     "eslint": "^6.0.1",
     "semantic-release": "^15.13.18",
-    "semantic-release-cli": "^5.1.1",
-    "travis-deploy-once": "^5.0.11"
+    "semantic-release-cli": "^5.1.1"
   }
 }

@@ -3,6 +3,7 @@ const log = require('loglevel');
 const uuid = require('uuid/v1');
 const { DockerNotInstalledError } = require('./errors');
 const errorMessages = require('./error-messages');
+const spinner = require('./spinner');
 
 const CTRL_P = '\u0010';
 const CTRL_Q = '\u0011';
@@ -83,6 +84,11 @@ module.exports = class DockerManager {
         log.debug(`=> Pulling ${this.imageName}`);
         return new Promise((resolve, reject) => {
             this.docker.pull(this.imageName, (err, stream) => {
+                this.docker.modem.followProgress(
+                    stream,
+                    () => spinner.update('Preparing docker image'),
+                    ({status = 'Pulling docekr image'} = {}) => spinner.update(status)
+                );
                 let message = '';
                 if(err) return reject(err);
                 stream.on('data', data => message += data);

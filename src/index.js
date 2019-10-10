@@ -32,7 +32,7 @@ const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'silent'];
  * @param {string} [options.version=latest] The version of the docker image
  * @param {string} [options.noCleanup=false] If it should not remove the container
  */
-async function tryPackage(packages, options) {
+async function tryPackage(packages, options = { }) {
     // options.verbose can be 0, therefor need to be
     // explicitly check if is null
     const verbosity = options.verbose === null ? 2 : options.verbose;

@@ -37,14 +37,14 @@
     }
   },
   "dependencies": {
-    "cli-spinner": "^0.2.10",
-    "commander": "^3.0.0",
-    "dockerode": "^3.0.0",
-    "loglevel": "^1.6.3",
-    "node-emoji": "^1.10.0",
-    "progress": "^2.0.3",
-    "rxjs": "^6.5.2",
-    "uuid": "^3.3.2"
+    "cli-spinner": "0.2.10",
+    "commander": "3.0.2",
+    "dockerode": "3.0.2",
+    "loglevel": "1.6.4",
+    "node-emoji": "1.10.0",
+    "progress": "2.0.3",
+    "rxjs": "6.5.3",
+    "uuid": "3.3.3"
   },
   "devDependencies": {
     "@commitlint/cli": "8.2.0",

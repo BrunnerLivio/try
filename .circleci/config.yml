@@ -55,12 +55,12 @@ workflows:
               only: master
       - lint:
           filters:
-            tags:
+            branches:
               only: master
       - release:
           requires:
             - build
             - lint
           filters:
-            tags:
+            branches:
               only: master

@@ -23,16 +23,18 @@ You can print the usage by executing `try --help`.
 
 ```shell
 
-Usage: try [packages]
+Usage: try [options]
 
 Quickly try out npm packages inside a container
 
 Options:
   -V, --version              output the version number
   -v, --verbose              Verbosity value
-  -i, --image [image]        The docker image which it should pull from [node] (default: "node")
-  --image-version [version]  Specify the node image version [latest] (default: "latest")
+  -i, --image [image]        The docker image which it should pull from (default: "node")
+  --image-version [version]  Specify the node image version (default: "latest")
+  --no-cleanup               If set to true, the created container will not get cleaned up
   --silent                   If the program should not print any log statements
+  --ts                       If it the program should use TypeScript
   -h, --help                 output usage information
 
 ```
@@ -64,7 +66,7 @@ install the dependencies using `npm` and execute the program.
 git clone https://github.com/BrunnerLivio/try.git
 cd try
 npm install
-node src/cli.js
+npm start
 
 ```
 

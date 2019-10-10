@@ -10,11 +10,13 @@ const packageJSON = require('../package.json');
 program
     .description(packageJSON.description)
     .version(packageJSON.version)
+    .name('try')
     .option('-v, --verbose', 'Verbosity value', (_, total) => total + 1, 0)
     .option('-i, --image [image]', 'The docker image which it should pull from', 'node')
     .option('--image-version [version]', 'Specify the node image version', 'latest')
     .option('--no-cleanup', 'If set to true, the created container will not get cleaned up', false)
     .option('--silent', 'If the program should not print any log statements')
+    .option('--ts', 'If it the program should use TypeScript', false)
     .parse(process.argv)
 
 const packages = program.args;
@@ -39,7 +41,8 @@ async function main () {
             version: program.imageVersion,
             image: program.image,
             verbose: program.silent ? 5 : verbose,
-            noCleanup: !program.cleanup
+            noCleanup: !program.cleanup,
+            useTypescript: program.ts
         });
         process.exit(0);
     } catch(err) {

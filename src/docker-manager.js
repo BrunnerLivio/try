@@ -101,18 +101,29 @@ module.exports = class DockerManager {
     /**
      * Creates the container with an unique id
      */
-    async createContainer() {
+    async createContainer(useTypescript = false) {
+        let Cmd = ['node'];
+        if (useTypescript) {
+          const typeScriptPackages = 'ts-node typescript';
+          const tsNodePath = './node_modules/.bin/ts-node';
+          Cmd = ['/bin/bash', '-c', `yarn add global ${typeScriptPackages} && ${tsNodePath}`];
+        }
         this.containerName = this._generateContainerName();
         log.debug(`=> Creating container ${this.containerName}`);
         this.container = await this.docker.createContainer({ 
             Image: this.imageName,
-            Cmd: ['node'],
             name: this.containerName,
+            Cmd,
             Tty: true,
+            WorkingDir: '/usr/node',
             OpenStdin: true });
         log.debug('=> Starting container');
         await this.container.start();
         return this.containerName;
+    }
+
+    async updateCmd(Cmd) {
+      return this.container.update({ Cmd });
     }
 
     /**

@@ -36,10 +36,12 @@ jobs:
       - *install-deps
       - *lint
   release:
-    <<: *base-template
     docker:
       - image: circleci/node:12
     steps:
+      - checkout
+      - *restore-cache
+      - *install-deps
       - run: npx semantic-release
 
 workflows:

@@ -35,6 +35,12 @@ jobs:
       - *restore-cache
       - *install-deps
       - *lint
+  release:
+    <<: *base-template
+    docker:
+      - image: circleci/node:12
+    steps:
+      - run: npx semantic-release
 
 workflows:
   version: 2
@@ -42,3 +48,12 @@ workflows:
     jobs:
       - build
       - lint
+      - release:
+          requires:
+            - build
+            - lint
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master

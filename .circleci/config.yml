@@ -8,10 +8,6 @@ aliases:
     run:
         name: Install dependencies
         command: npm ci
-  - &lint
-    run:
-        name: Lint
-        command: npm run lint
 
 base-template: &base-template
   working_directory: ~/try
@@ -34,7 +30,8 @@ jobs:
       - checkout
       - *restore-cache
       - *install-deps
-      - *lint
+      - run: npm run lint
+      - run: ./node_modules/.bin/commitlint-circle
   release:
     docker:
       - image: circleci/node:12

@@ -1,10 +1,10 @@
 
 const log = require('loglevel');
 const emoji = require('node-emoji');
-const Spinner = require('cli-spinner').Spinner;
 
 const { DockerNotInstalledError, TryPackageError } = require('./errors');
 const DockerManager = require('./docker-manager.js');
+const spinner = require('./spinner');
 
 // TODO: Implement with program
 // function parseInstalledPackages(msg) {
@@ -42,11 +42,7 @@ async function tryPackage(packages, options) {
     // Check if Docker API is available
     await docker.ping();
 
-    let spinner = {};
-    if (verbosity === 2) {
-        spinner = new Spinner(`=> ${emoji.get('hourglass_flowing_sand')} Setting up environment %s`);
-        spinner.start()
-    }
+    spinner.start({verbosity});
 
     // Update image and create the container
     const message = await docker.pullImage(options.image, options.version);
@@ -64,11 +60,10 @@ async function tryPackage(packages, options) {
 
     // Install packages
     log.debug('Installing packages');
+    spinner.update(`Installing packages ${packages.join(', ')}`);
     await docker.execute(['yarn', 'add', ...packages]);
 
-    if (verbosity === 2) spinner.stop();
-    // Add newline after spinner
-    log.info('');
+    spinner.stop();
     log.info(`=> ${emoji.get('package')} Using NodeJS ${nodeVersion.replace('\n', '')}`)
 
     // Start node and attach to stdin

@@ -31,6 +31,11 @@
     "type": "git",
     "url": "https://github.com/BrunnerLivio/try"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "dependencies": {
     "cli-spinner": "^0.2.10",
     "commander": "^3.0.0",
@@ -42,10 +47,14 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-angular": "^8.2.0",
     "@semantic-release/commit-analyzer": "6.3.0",
     "@semantic-release/git": "7.0.16",
     "@semantic-release/release-notes-generator": "7.3.0",
+    "commitlint-circle": "^1.0.0",
     "eslint": "6.5.1",
+    "husky": "^3.0.8",
     "semantic-release": "15.13.24",
     "semantic-release-cli": "5.2.1"
   }

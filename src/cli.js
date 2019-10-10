@@ -25,7 +25,10 @@ let verbose = program.verbose ? 2 - program.verbose : 2;
 verbose = verbose < 0 ? 0 : verbose;
 
 // Warn user if no packages are given
-!packages.length && (log.error('You must enter the packages you want to use') || process.exit(1));
+if (!packages.length) {
+  log.error('You must enter the packages you want to use');
+  process.exit(1)
+}
 
 /**
  * Executes the main program

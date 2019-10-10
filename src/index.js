@@ -30,7 +30,7 @@ const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'silent'];
  * @param {number} [options.verbose=2] Numeric index of the log verbosity from 0 (trace) to 5 (silent)
  * @param {string} [options.image=node] The name of the docker image
  * @param {string} [options.version=latest] The version of the docker image
- * @param {string} [options.noCleanup=false] If it should not remove the container
+ * @param {boolean} [options.noCleanup=false] If it should not remove the container
  */
 async function tryPackage(packages, options = { }) {
     // options.verbose can be 0, therefor need to be

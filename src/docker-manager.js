@@ -43,7 +43,7 @@ module.exports = class DockerManager {
 
     /**
      * Exists the given stream and removes all listeners
-     * @param {stream} stream The stream to exit
+     * @param stream The stream to exit
      */
     _exit (stream) {
         process.stdout.removeListener('resize', this._resize);
@@ -55,14 +55,14 @@ module.exports = class DockerManager {
 
     /**
      * Connects the tty stdin / stdout to the given stream
-     * @param {Stream} stream The exec stream
+     * @param stream The exec stream
      */
     _connectStd(stream) {
         // Show outputs
         stream.pipe(process.stdout);
 
         // Connect stdin
-        this.isRaw = process.isRaw;
+        this.isRaw = process.stdin.isRaw;
         process.stdin.resume();
         process.stdin.setEncoding('utf8');
         process.stdin.setRawMode(true);

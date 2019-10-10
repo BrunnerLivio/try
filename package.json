@@ -42,11 +42,11 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@semantic-release/commit-analyzer": "^6.2.0",
-    "@semantic-release/git": "^7.0.16",
-    "@semantic-release/release-notes-generator": "^7.2.1",
-    "eslint": "^6.0.1",
-    "semantic-release": "^15.13.18",
-    "semantic-release-cli": "^5.1.1"
+    "@semantic-release/commit-analyzer": "6.2.0",
+    "@semantic-release/git": "7.0.16",
+    "@semantic-release/release-notes-generator": "7.2.1",
+    "eslint": "6.0.1",
+    "semantic-release": "15.13.18",
+    "semantic-release-cli": "5.1.1"
   }
 }

@@ -45,7 +45,7 @@
     "@semantic-release/commit-analyzer": "6.3.0",
     "@semantic-release/git": "7.0.16",
     "@semantic-release/release-notes-generator": "7.3.0",
-    "eslint": "6.0.1",
+    "eslint": "6.5.1",
     "semantic-release": "15.13.24",
     "semantic-release-cli": "5.2.1"
   }

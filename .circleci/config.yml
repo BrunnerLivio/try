@@ -48,28 +48,22 @@ workflows:
   version: 2
   build_and_lint:
     jobs:
-      - build:
-          filters:
-            tags:
-              only: /.*/
-      - lint:
-          filters:
-              tags:
-                only: /.*/
+      - build
+      - lint
   build_lint_deploy:
     jobs:
       - build:
           filters:
-            tags:
-              only: /^v.*/
+            branches:
+              only: master
       - lint:
           filters:
             tags:
-              only: /^v.*/
+              only: master
       - release:
           requires:
             - build
             - lint
           filters:
             tags:
-              only: /^v.*/
+              only: master

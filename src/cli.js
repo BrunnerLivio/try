@@ -4,7 +4,7 @@ const { tryPackage, TryPackageError } = require('./index');
 const log = require('loglevel');
 
 const program = require('commander');
-const packageJSON = require('./package.json');
+const packageJSON = require('../package.json');
 
 // Setup the CLI options
 program

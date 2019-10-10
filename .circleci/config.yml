@@ -1,0 +1,44 @@
+version: 2
+
+aliases:
+  - &restore-cache
+    restore_cache:
+        key: dependency-cache-{{ checksum "package-lock.json" }}
+  - &install-deps
+    run:
+        name: Install dependencies
+        command: npm ci
+  - &lint
+    run:
+        name: Lint
+        command: npm run lint
+
+base-template: &base-template
+  working_directory: ~/try
+  steps:
+    - checkout
+    - *restore-cache
+    - *install-deps
+
+jobs:
+  build:
+    working_directory: ~/try
+    <<: *base-template
+    docker:
+      - image: circleci/node:12
+  lint:
+    working_directory: ~/try
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - *restore-cache
+      - *install-deps
+      - *lint
+
+workflows:
+  version: 2
+  build_and_lint:
+    jobs:
+      - build
+      - lint

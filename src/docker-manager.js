@@ -4,6 +4,7 @@ const uuid = require('uuid/v1');
 const { DockerNotInstalledError } = require('./errors');
 const errorMessages = require('./error-messages');
 const spinner = require('./spinner');
+const PullProgressIndicator = require('./pull-progress-indicator');
 
 const CTRL_P = '\u0010';
 const CTRL_Q = '\u0011';
@@ -83,16 +84,29 @@ module.exports = class DockerManager {
         this.imageName = `${image}:${version}`;
         log.debug(`=> Pulling ${this.imageName}`);
         return new Promise((resolve, reject) => {
+            spinner.update('Pulling docker image');
+
+            const pullProgressIndicator = new PullProgressIndicator();
             this.docker.pull(this.imageName, (err, stream) => {
                 this.docker.modem.followProgress(
                     stream,
                     () => spinner.update('Preparing docker image'),
-                    ({status = 'Pulling docekr image'} = {}) => spinner.update(status)
+                    event => {
+                        // Stop spinner so `PullProgressIndicator` could take over stdout
+                        spinner.stop();
+                        pullProgressIndicator.update(event)
+                    }
                 );
+                
                 let message = '';
                 if(err) return reject(err);
                 stream.on('data', data => message += data);
-                stream.on('end', () => resolve(message));
+                stream.on('end', () => {
+                    // Restart spinner, now that `PullProgressIndicator` is done!
+                    spinner.start();
+                    pullProgressIndicator.stop();
+                    resolve(message)
+                });
                 stream.on('error', err => reject(err));
             });
         });

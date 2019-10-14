@@ -44,8 +44,6 @@
     "log-update": "^3.3.0",
     "loglevel": "1.6.4",
     "node-emoji": "1.10.0",
-    "progress": "2.0.3",
-    "rxjs": "6.5.3",
     "uuid": "3.3.3"
   },
   "devDependencies": {

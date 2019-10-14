@@ -3,8 +3,6 @@ const log = require('loglevel');
 const uuid = require('uuid/v1');
 const { DockerNotInstalledError } = require('./errors');
 const errorMessages = require('./error-messages');
-const spinner = require('./spinner');
-const PullProgressIndicator = require('./pull-progress-indicator');
 
 const CTRL_P = '\u0010';
 const CTRL_Q = '\u0011';
@@ -79,34 +77,28 @@ module.exports = class DockerManager {
      * Pulls the given image
      * @param {string} image The image which should get pulled
      * @param {string} version The version of the image which should get pulled 
+     * @param {function} onProgress Periodically called with a docker stream event
      */
-    pullImage(image = 'node', version = 'latest') {
+    pullImage(image = 'node', version = 'latest', onProgress) {
         this.imageName = `${image}:${version}`;
         log.debug(`=> Pulling ${this.imageName}`);
         return new Promise((resolve, reject) => {
-            spinner.update('Pulling docker image');
+            
+            // default to empty function, so it could be falsy!
+            const onProgressFn = onProgress || function emptyFn() {};
 
-            const pullProgressIndicator = new PullProgressIndicator();
             this.docker.pull(this.imageName, (err, stream) => {
                 this.docker.modem.followProgress(
                     stream,
-                    () => spinner.update('Preparing docker image'),
-                    event => {
-                        // Stop spinner so `PullProgressIndicator` could take over stdout
-                        spinner.stop();
-                        pullProgressIndicator.update(event)
-                    }
+                    // Explicit empty function for `onFinish`, because `stream#end` listener will handle things!  
+                    () => {},
+                    event => onProgressFn(event)
                 );
                 
                 let message = '';
                 if(err) return reject(err);
                 stream.on('data', data => message += data);
-                stream.on('end', () => {
-                    // Restart spinner, now that `PullProgressIndicator` is done!
-                    spinner.start();
-                    pullProgressIndicator.stop();
-                    resolve(message)
-                });
+                stream.on('end', () => resolve(message));
                 stream.on('error', err => reject(err));
             });
         });

@@ -5,22 +5,43 @@ const emoji = require('node-emoji');
 const { DockerNotInstalledError, TryPackageError } = require('./errors');
 const DockerManager = require('./docker-manager.js');
 const spinner = require('./spinner');
-
-// TODO: Implement with program
-// function parseInstalledPackages(msg) {
-//   const regex = / ([^\s]+)@(.*)/gm;
-//   const matches = regex.exec(msg);
-//   const packages = [];
-//   while ((m = regex.exec(msg)) !== null) {
-//     if (m.index === regex.lastIndex) {
-//         regex.lastIndex++;
-//     }
-//     packages.push(m[0])
-//   }
-//   return packages;
-// }
+const PullProgressIndicator = require('./pull-progress-indicator');
 
 const LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'silent'];
+
+const docker = new DockerManager();
+
+/**
+ * Pulls docker image with a progress indicator
+ * 
+ * @param {string} image 
+ * @param {string} version 
+ */
+async function pullDockerImageWithProgress(image, version) {
+    spinner.update('Pulling docker image');
+
+    const pullProgressIndicator = new PullProgressIndicator();
+
+    const message = await docker.pullImage(
+        image,
+        version,
+        // Progress indicator updates
+        event => {
+            // Stopping spinner so `pullProgressIndicator` could take over stdout
+            // TODO: Is there a better way to do this?
+            spinner.stop();
+
+            pullProgressIndicator.update(event)
+        }
+    );
+
+    pullProgressIndicator.stop();
+
+    // Start up spinner, because we're done showing progress!
+    spinner.start();
+
+    log.debug('=> Pulled image', message);
+}
 
 /**
  * Spawns a docker container, installs the given packages and runs the
@@ -39,15 +60,14 @@ async function tryPackage(packages = [], options = { }) {
     const verbosity = options.verbose === null ? 2 : options.verbose;
     log.setLevel(LOG_LEVELS[verbosity]);
 
-    const docker = new DockerManager();
     // Check if Docker API is available
     await docker.ping();
 
     spinner.start({verbosity});
 
     // Update image and create the container
-    const message = await docker.pullImage(options.image, options.version);
-    log.debug('=> Pulled image', message);
+    await pullDockerImageWithProgress(options.image, options.version);
+
     const containerName = await docker.createContainer(options.useTypescript);
 
     // Check if node is working

@@ -17,6 +17,7 @@ function start({verbosity = 2, message = 'Setting up environment'} = {}) {
 
 function stop() {
     spinner && spinner.stop(true);
+    spinner = null;
 }
 
 function update(message) {

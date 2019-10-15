@@ -38,12 +38,12 @@
   },
   "dependencies": {
     "cli-spinner": "0.2.10",
+    "colorette": "^1.1.0",
     "commander": "3.0.2",
     "dockerode": "3.0.2",
+    "log-update": "^3.3.0",
     "loglevel": "1.6.4",
     "node-emoji": "1.10.0",
-    "progress": "2.0.3",
-    "rxjs": "6.5.3",
     "uuid": "3.3.3"
   },
   "devDependencies": {

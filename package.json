@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node src/cli.js",
     "lint": "eslint src/**/*.js",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "test": "jest --passWithNoTests"
   },
   "author": {
     "email": "livio.brunner.lb1@gmail.com",
@@ -52,10 +53,27 @@
     "@semantic-release/commit-analyzer": "6.3.0",
     "@semantic-release/git": "7.0.16",
     "@semantic-release/release-notes-generator": "7.3.0",
+    "@types/jest": "^24.0.19",
     "commitlint-circle": "1.0.0",
     "eslint": "6.5.1",
+    "eslint-plugin-jest": "^22.20.0",
     "husky": "3.0.9",
+    "jest": "^24.9.0",
     "semantic-release": "15.13.27",
     "semantic-release-cli": "5.2.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.js$",
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

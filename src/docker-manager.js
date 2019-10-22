@@ -1,8 +1,8 @@
 const Docker = require('dockerode');
 const log = require('loglevel');
-const uuid = require('uuid/v1');
 const { DockerNotInstalledError } = require('./errors');
 const errorMessages = require('./error-messages');
+const { getContainerName } = require('./container');
 
 const CTRL_P = '\u0010';
 const CTRL_Q = '\u0011';
@@ -17,14 +17,6 @@ module.exports = class DockerManager {
     constructor() {
         this.docker = new Docker();
     }
-
-    /**
-     * Generates an unique container name
-     */
-   _generateContainerName() {
-        const containerUUID = uuid().split('-')[0];
-        return `try-package-${containerUUID}`;
-   }
 
    /**
     * Resizes the container when the uses tty resizes
@@ -114,7 +106,7 @@ module.exports = class DockerManager {
           const tsNodePath = './node_modules/.bin/ts-node';
           Cmd = ['/bin/bash', '-c', `yarn add global ${typeScriptPackages} && ${tsNodePath}`];
         }
-        this.containerName = this._generateContainerName();
+        this.containerName = getContainerName();
         log.debug(`=> Creating container ${this.containerName}`);
         this.container = await this.docker.createContainer({ 
             Image: this.imageName,

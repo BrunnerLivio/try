@@ -22,6 +22,15 @@ jobs:
     <<: *base-template
     docker:
       - image: circleci/node:12
+  test:
+    working_directory: ~/try
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - *restore-cache
+      - *install-deps
+      - run: npm test
   lint:
     working_directory: ~/try
     docker:
@@ -46,10 +55,15 @@ workflows:
   build_and_lint:
     jobs:
       - build
+      - test
       - lint
   build_lint_deploy:
     jobs:
       - build:
+          filters:
+            branches:
+              only: master
+      - test:
           filters:
             branches:
               only: master

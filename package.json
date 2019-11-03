@@ -1,6 +1,6 @@
 {
   "name": "try-pkg",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Quickly try out npm packages inside a container",
   "main": "src/index.js",
   "bin": {

@@ -40,7 +40,7 @@
   "dependencies": {
     "cli-spinner": "0.2.10",
     "colorette": "^1.1.0",
-    "commander": "3.0.2",
+    "commander": "4.0.0",
     "dockerode": "3.0.2",
     "log-update": "^3.3.0",
     "loglevel": "1.6.4",

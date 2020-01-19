@@ -50,8 +50,8 @@
   "devDependencies": {
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-angular": "8.2.0",
-    "@semantic-release/commit-analyzer": "6.3.3",
-    "@semantic-release/git": "7.0.18",
+    "@semantic-release/commit-analyzer": "7.0.0",
+    "@semantic-release/git": "8.0.0",
     "@semantic-release/release-notes-generator": "7.3.5",
     "@types/jest": "24.9.0",
     "commitlint-circle": "1.0.0",
@@ -59,7 +59,7 @@
     "eslint-plugin-jest": "23.6.0",
     "husky": "3.1.0",
     "jest": "24.9.0",
-    "semantic-release": "15.14.0",
+    "semantic-release": "16.0.2",
     "semantic-release-cli": "5.2.3"
   },
   "jest": {

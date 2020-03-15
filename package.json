@@ -45,7 +45,7 @@
     "log-update": "^4.0.0",
     "loglevel": "1.6.7",
     "node-emoji": "1.10.0",
-    "uuid": "3.4.0"
+    "uuid": "7.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",

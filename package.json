@@ -42,7 +42,7 @@
     "colorette": "^1.1.0",
     "commander": "4.1.1",
     "dockerode": "3.1.0",
-    "log-update": "^3.3.0",
+    "log-update": "^4.0.0",
     "loglevel": "1.6.7",
     "node-emoji": "1.10.0",
     "uuid": "3.4.0"

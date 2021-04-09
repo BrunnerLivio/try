@@ -55,7 +55,7 @@
     "@semantic-release/release-notes-generator": "9.0.2",
     "@types/jest": "26.0.22",
     "commitlint-circle": "1.0.0",
-    "eslint": "7.23.0",
+    "eslint": "7.24.0",
     "eslint-plugin-jest": "24.3.4",
     "husky": "6.0.0",
     "jest": "26.6.3",

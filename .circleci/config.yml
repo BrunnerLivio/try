@@ -21,11 +21,11 @@ jobs:
     working_directory: ~/try
     <<: *base-template
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:15
   test:
     working_directory: ~/try
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:15
     steps:
       - checkout
       - *restore-cache
@@ -34,7 +34,7 @@ jobs:
   lint:
     working_directory: ~/try
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:15
     steps:
       - checkout
       - *restore-cache
@@ -43,7 +43,7 @@ jobs:
       - run: ./node_modules/.bin/commitlint-circle
   release:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:15
     steps:
       - checkout
       - *restore-cache

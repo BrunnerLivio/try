@@ -58,7 +58,7 @@
     "eslint": "7.29.0",
     "eslint-plugin-jest": "24.3.6",
     "husky": "6.0.0",
-    "jest": "27.0.4",
+    "jest": "27.0.5",
     "semantic-release": "17.4.4",
     "semantic-release-cli": "5.4.3"
   },

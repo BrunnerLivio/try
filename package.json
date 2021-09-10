@@ -60,7 +60,7 @@
     "husky": "7.0.2",
     "jest": "27.1.1",
     "semantic-release": "17.4.7",
-    "semantic-release-cli": "5.4.3"
+    "semantic-release-cli": "5.4.4"
   },
   "jest": {
     "moduleFileExtensions": [

@@ -56,7 +56,7 @@
     "@types/jest": "27.4.1",
     "commitlint-circle": "1.0.0",
     "eslint": "8.11.0",
-    "eslint-plugin-jest": "25.7.0",
+    "eslint-plugin-jest": "26.1.1",
     "husky": "7.0.4",
     "jest": "27.5.1",
     "semantic-release": "18.0.1",

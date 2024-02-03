@@ -48,8 +48,8 @@
     "uuid": "7.0.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.5",
-    "@commitlint/config-angular": "17.6.5",
+    "@commitlint/cli": "17.8.1",
+    "@commitlint/config-angular": "17.8.1",
     "@semantic-release/commit-analyzer": "10.0.4",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/release-notes-generator": "11.0.7",

@@ -44,7 +44,7 @@
     "dockerode": "3.2.0",
     "log-update": "^4.0.0",
     "loglevel": "1.7.1",
-    "node-emoji": "1.10.0",
+    "node-emoji": "1.11.0",
     "uuid": "7.0.3"
   },
   "devDependencies": {

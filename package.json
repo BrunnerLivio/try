@@ -53,7 +53,7 @@
     "@semantic-release/commit-analyzer": "11.1.0",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/release-notes-generator": "12.1.0",
-    "@types/jest": "29.5.12",
+    "@types/jest": "29.5.14",
     "commitlint-circle": "1.0.0",
     "eslint": "8.57.0",
     "eslint-plugin-jest": "27.9.0",
